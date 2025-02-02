@@ -1,22 +1,54 @@
+import PropTypes from 'prop-types';
 import LIMIT_ICON from "@/assets/Limit.svg"
 import { NavLink } from "react-router-dom";
-const SuccessPage = () => {
-    return (
-        <>
-            <div className="flex flex-col justify-between mt-52 items-center h-screen">
-                <div className="flex flex-col gap-14 items-center">
-                    <div className="">
-                        <img src={LIMIT_ICON} alt="" width="600" />
-                    </div>
-                    <div className="">
-                        <p className="font-semibold text-3xl">Halo! Anda telah menggunakan semua kesempatan yang tersedia untuk layanan AI kami dalam membantu Anda.
-                            Terima kasih telah memanfaatkan layanan kami</p>
-                    </div>
-                </div>
-                <NavLink to="/" className="w-full p-4 bg-primary rounded-md text-center font-bold text-white text-lg">Home</NavLink>
-            </div>
-        </>
-    )
-}
 
-export default SuccessPage;
+const LimitPage = ({ limitType = "general", onReset }) => {
+  const limitMessages = {
+    email: "Anda telah menggunakan email yang sama untuk layanan AI kami",
+    daily: "Anda telah mencapai batas penggunaan harian kami",
+    general: "Anda telah menggunakan semua kesempatan yang tersedia untuk layanan AI kami dalam membantu Anda. Terima kasih telah memanfaatkan layanan kami"
+  };
+
+  return (
+    <div className="flex flex-col justify-between mt-52 items-center min-h-screen">
+      <div className="flex flex-col gap-14 items-center text-center">
+        <div className="animate-bounce">
+          <img src={LIMIT_ICON} alt="Limit Reached" width="600" />
+        </div>
+        <div className="max-w-4xl">
+          <p className="font-semibold text-3xl text-red-600">
+            {limitMessages[limitType]}
+          </p>
+          <p className="mt-4 text-xl text-gray-600">
+            Silakan coba lagi besok atau gunakan email lain untuk melanjutkan
+          </p>
+        </div>
+      </div>
+      <div className="flex gap-4 w-full max-w-md">
+        <button
+          onClick={onReset}
+          className="w-full p-4 bg-[hsl(332_89%_42%)] rounded-md text-center font-bold text-white text-lg hover:bg-[hsl(332_89%_37%)] transition-colors border-[1px] border-[hsl(332_89%_42%)]"
+        >
+          Coba Lagi
+        </button>
+        <NavLink 
+          to="/" 
+          className="w-full p-4 bg-gray-600 rounded-md text-center font-bold text-white text-lg hover:bg-gray-700 transition-colors"
+        >
+          Home
+        </NavLink>
+      </div>
+    </div>
+  );
+};
+
+LimitPage.propTypes = {
+  limitType: PropTypes.oneOf(['email', 'daily', 'general']),
+  onReset: PropTypes.func.isRequired
+};
+
+LimitPage.defaultProps = {
+  limitType: 'general'
+};
+
+export default LimitPage;

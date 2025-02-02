@@ -14,7 +14,7 @@ const EventFormCarousel = ({ onSubmit }) => {
     price: '',
     highlightEvent: '',
     nilaiJual: '',
-    mainGolas: '',
+    mainGoals: '',
     marketingBudget: '',
     brandGuidelines: '',
     longEvent: '',

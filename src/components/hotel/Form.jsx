@@ -10,21 +10,30 @@ const FormCarousel = ({ onSumbit }) => {
     services: '',
     target: '',
     peak: '',
-  })
+    offPeak: '',
+    interesting: '',
+    specialServices: '',
+    email: ''
+  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-
   };
 
   const steps = [
     <Step1 formData={formData} handleChange={handleChange} />,
     <Step2 formData={formData} handleChange={handleChange} />,
-    <Step3 formData={formData} handleChange={handleChange} />,
+    <Step3 formData={formData} handleChange={handleChange} />
   ];
 
+  // Single declaration of nextStep
   const nextStep = () => {
+    if (!validateStep(currentStep)) {
+      alert('Please fill all required fields');
+      return;
+    }
+    
     if (currentStep < steps.length - 1) {
       setCurrentStep(currentStep + 1);
     }
@@ -36,9 +45,22 @@ const FormCarousel = ({ onSumbit }) => {
     }
   };
 
+  const validateStep = (step) => {
+    switch(step) {
+      case 0:
+        return formData.type && formData.location && formData.services;
+      case 1:
+        return formData.target && formData.peak && formData.offPeak;
+      case 2:
+        return formData.interesting && formData.specialServices && formData.email;
+      default:
+        return true;
+    }
+  };
+
   const submit = () => {
-    onSumbit(formData)
-  }
+    onSumbit(formData);
+  };
   return (
     <div className="flex flex-col items-center justify-center">
       <p className="font-semibold text-2xl">Hotel</p>
