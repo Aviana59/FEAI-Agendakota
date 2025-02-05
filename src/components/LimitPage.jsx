@@ -24,16 +24,16 @@ const LimitPage = ({ limitType = "general", onReset }) => {
           </p>
         </div>
       </div>
-      <div className="flex gap-4 w-full max-w-md">
-        <button
+      <div className="flex flex-col gap-4 w-full">
+        {<button
           onClick={onReset}
-          className="w-full p-4 bg-[hsl(332_89%_42%)] rounded-md text-center font-bold text-white text-lg hover:bg-[hsl(332_89%_37%)] transition-colors border-[1px] border-[hsl(332_89%_42%)]"
+          className="w-full p-2 bg-[hsl(332_89%_42%)] rounded-md text-center font-bold text-white text-lg hover:bg-[hsl(332_89%_37%)] transition-colors border-[1px] border-[hsl(332_89%_42%)]"
         >
           Coba Lagi
-        </button>
-        <NavLink 
-          to="/" 
-          className="w-full p-4 bg-gray-600 rounded-md text-center font-bold text-white text-lg hover:bg-gray-700 transition-colors"
+        </button>}
+        <NavLink
+          to="/"
+          className="w-full p-2 bg-white border-2 border-[hsl(332_89%_37%)] rounded-md text-center font-bold text-[hsl(332_89%_37%)] text-lg hover:bg-[hsl(332_89%_37%)] hover:text-white transition-colors"
         >
           Home
         </NavLink>

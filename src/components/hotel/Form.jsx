@@ -33,7 +33,7 @@ const FormCarousel = ({ onSumbit }) => {
       alert('Please fill all required fields');
       return;
     }
-    
+
     if (currentStep < steps.length - 1) {
       setCurrentStep(currentStep + 1);
     }
@@ -46,7 +46,7 @@ const FormCarousel = ({ onSumbit }) => {
   };
 
   const validateStep = (step) => {
-    switch(step) {
+    switch (step) {
       case 0:
         return formData.type && formData.location && formData.services;
       case 1:
@@ -178,7 +178,7 @@ const Step2 = ({ formData, handleChange }) => (
         value={formData.target}
         onChange={handleChange}
         className="w-full px-4 py-2 border rounded"
-        placeholder="Enter your address"
+        placeholder="Resort Hotel"
       />
     </div>
     <div className="mb-4">
@@ -189,7 +189,7 @@ const Step2 = ({ formData, handleChange }) => (
         onChange={handleChange}
         rows="5"
         className="border border-1 rounded-sm w-full p-4"
-        placeholder="Resepsionis 24 jam, gym, kolam renang, jogging, track, parkir mobil motor sepeda, laundry, spa," />
+        placeholder="libur nataru, imlek, libur panjang, valentine" />
     </div>
     <div className="mb-4">
       <label className="block mb-1 text-sm font-medium">Off Peak Seasons</label>
@@ -199,7 +199,7 @@ const Step2 = ({ formData, handleChange }) => (
         onChange={handleChange}
         rows="5"
         className="border border-1 rounded-sm w-full p-4"
-        placeholder="Resepsionis 24 jam, gym, kolam renang, jogging, track, parkir mobil motor sepeda, laundry, spa," />
+        placeholder="Hari kerja" />
     </div>
   </form>
 );
@@ -214,7 +214,9 @@ const Step3 = ({ formData, handleChange }) => (
         name="interesting"
         rows="5"
         className="border border-1 rounded-sm w-full p-4"
-        placeholder="Resepsionis 24 jam, gym, kolam renang, jogging, track, parkir mobil motor sepeda, laundry, spa," />
+        placeholder="Pemandangan pantai yang dapat dilihat dari
+kamar, harga murah, terdapat berbagai tipe
+kamar" />
     </div>
     <div className="mb-4">
       <label className="block mb-1 text-sm font-medium">Layanan Spesial Hotel</label>
@@ -224,7 +226,8 @@ const Step3 = ({ formData, handleChange }) => (
         name="specialServices"
         rows="5"
         className="border border-1 rounded-sm w-full p-4"
-        placeholder="Resepsionis 24 jam, gym, kolam renang, jogging, track, parkir mobil motor sepeda, laundry, spa," />
+        placeholder="Check in 24 jam, terdapat opsi memesan kamar
+24 jam" />
     </div>
     <div className="mb-4">
       <label className="block mb-1 text-sm font-medium">Email</label>

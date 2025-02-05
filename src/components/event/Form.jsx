@@ -131,12 +131,13 @@ const Step1 = ({ formData, handleChange }) => (
       />
     </div><div className="mb-4">
       <label className="block mb-1 text-sm font-medium">Brief Description</label>
-      <input
+      <textarea
         type="text"
         name="briefDescription"
         value={formData.briefDescription}
         onChange={handleChange}
-        className="w-full px-4 py-20 border rounded"
+        className="w-full px-4 py-2 border rounded"
+        rows={5}
         placeholder="sebuah acara yang dirancang untuk menghadirkan suasana hiburan malam yang lebih seru dan interaktif dibandingkan dengan versi sebelumnya. Acara ini biasanya menampilkan berbagai elemen, seperti musik dari DJ atau band, tema dekorasi yang menarik, hiburan interaktif, dan aktivitas sosial."
       />
     </div>
@@ -158,16 +159,14 @@ const Step2 = ({ formData, handleChange }) => (
   <form className="p-4">
     <div className="mb-4">
       <label className="block mb-1 text-sm font-medium">Target audience demographics and psychographics</label>
-      <input
+      <textarea
         type="text"
-        name="Target"
+        name="target"
         value={formData.target}
         onChange={handleChange}
-        className="w-full px-4 py-20 border rounded"
-        placeholder="Usia: 18-35 tahun.
-Jenis Kelamin: Pria dan wanita.
-Menyukai kegiatan yang melibatkan komunitas atau networking.
-Tertarik pada musik live, DJ, atau tema pesta yang unik."
+        rows={6}
+        className="w-full p-4 border rounded"
+        placeholder="Usia: 18-35 tahun. Jenis Kelamin: Pria dan wanita. Menyukai kegiatan yang melibatkan komunitas atau networking. Tertarik pada musik live, DJ, atau tema pesta yang unik."
       />
     </div>
     <div className="mb-4">
@@ -204,10 +203,9 @@ const Step3 = ({ formData, handleChange }) => (
         name="highlightEvent"
         value={formData.highlightEvent}
         onChange={handleChange}
-        className="border border-1 rounded-sm w-full p-18"
-        placeholder="Live Music Performance, Immersive Party Theme
-Interactive Activities, Special Food and Beverages
-Guest Appearances, Exclusive Merchandise"
+        rows={7}
+        className="border border-1 rounded-sm w-full p-4"
+        placeholder="Live Music Performance, Immersive Party Theme Interactive Activities, Special Food and Beverages Guest Appearances, Exclusive Merchandise"
       />
     </div>
     <div className="mb-4">
@@ -217,9 +215,9 @@ Guest Appearances, Exclusive Merchandise"
         name="nilaiJual"
         value={formData.nilaiJual}
         onChange={handleChange}
-        className="border border-1 rounded-sm w-full p-16"
-        placeholder="Thematic Experience, Community Connection,
-Hybrid Entertainment, Exclusivity and Prestige"
+        rows={7}
+        className="border border-1 rounded-sm w-full p-4"
+        placeholder="Thematic Experience, Community Connection, Hybrid Entertainment, Exclusivity and Prestige"
       />
     </div>
     <div className="mb-4">
@@ -229,7 +227,8 @@ Hybrid Entertainment, Exclusivity and Prestige"
         name="mainGoals"
         value={formData.mainGoals}
         onChange={handleChange}
-        className="border border-1 rounded-sm w-full p-20"
+        rows={7}
+        className="border border-1 rounded-sm w-full p-4"
         placeholder="Meningkatkan Brand Awareness, Menciptakan Pengalaman Tak Terlupakan, Membangun Komunitas Loyal, Mengoptimalkan Engagement, Monetisasi dan Profitabilitas"
       />
     </div>
@@ -240,34 +239,34 @@ const Step4 = ({ formData, handleChange }) => (
   <form className="p-4">
     <div className="mb-4">
       <label className="block mb-1 text-sm font-medium">Marketing Budget</label>
-      <input
-        type="text"
+      <textarea
         name="marketingBudget"
         value={formData.marketingBudget}
         onChange={handleChange}
-        className="w-full px-4 py-2 border rounded"
+        rows={5}
+        className="w-full p-4 border rounded"
         placeholder="Rp.50.000.000"
       />
     </div>
     <div className="mb-4">
       <label className="block mb-1 text-sm font-medium">Brand Guidelines</label>
-      <input
-        type="text"
+      <textarea
         name="brandGuidelines"
         value={formData.brandGuidelines}
         onChange={handleChange}
-        className="w-full px-4 py-16 border rounded"
+        rows={5}
+        className="w-full p-4 border rounded"
         placeholder="Logo dan Identitas Visual, Logo dan Identitas Visual, Media Guidelines, Audience Persona"
       />
     </div>
     <div className="mb-4">
       <label className="block mb-1 text-sm font-medium">Seberapa Lama Marketing Berjalan</label>
-      <input
-        type="text"
+      <textarea
         name="longEvent"
         value={formData.longEvent}
         onChange={handleChange}
-        className="w-full px-4 py-20 border rounded"
+        rows={5}
+        className="w-full p-4 border rounded"
         placeholder="90 hari dari hari H"
       />
     </div>
@@ -283,6 +282,7 @@ const Step5 = ({ formData, handleChange }) => (
         name="previousEvent"
         value={formData.previousEvent}
         onChange={handleChange}
+        rows={5}
         className="border border-1 rounded-sm w-full p-4"
         placeholder="Midnight Party 1.0"
       />
@@ -293,8 +293,9 @@ const Step5 = ({ formData, handleChange }) => (
         type="text"
         name="competitorEvent"
         value={formData.competitorEvent}
+        rows={5}
         onChange={handleChange}
-        className="border border-1 rounded-sm w-full p-16"
+        className="border border-1 rounded-sm w-full p-4"
         placeholder="DWP (Djakarta Warehouse Project), We The Fest"
       />
     </div>
@@ -305,7 +306,8 @@ const Step5 = ({ formData, handleChange }) => (
         name="competitorMarketing"
         value={formData.competitorMarketing}
         onChange={handleChange}
-        className="border border-1 rounded-sm w-full p-20"
+        className="border border-1 rounded-sm w-full p-4"
+        rows={5}
         placeholder="Fokus pada promosi internasional dan artis terkenal.
 Menggunakan hype video dan teaser panjang untuk membangun ekspektasi. Kolaborasi dengan brand lifestyle seperti fashion atau food "
       />
@@ -322,7 +324,8 @@ const Step6 = ({ formData, handleChange }) => (
         name="marketingChannel"
         value={formData.marketingChannel}
         onChange={handleChange}
-        className="border border-1 rounded-sm w-full p-24"
+        rows={3}
+        className="border border-1 rounded-sm w-full p-4"
         placeholder="Instagram, Tiktok, community"
       />
     </div>
@@ -333,7 +336,8 @@ const Step6 = ({ formData, handleChange }) => (
         name="marketingLimitation"
         value={formData.marketingLimitation}
         onChange={handleChange}
-        className="border border-1 rounded-sm w-full p-24"
+        rows={5}
+        className="border border-1 rounded-sm w-full p-4"
         placeholder="Fokus pada platform dengan ROI (Return on Investment) tertinggi. Pembatasan terkait musik malam dan minuman beralkohol. Jadwal event mendekati acara lain dapat mengurangi perhatian audiens."
       />
     </div>
@@ -349,7 +353,8 @@ const Step7 = ({ formData, handleChange }) => (
         name="internalResources"
         value={formData.internalResources || ''}
         onChange={handleChange}
-        className="border border-1 rounded-sm w-full p-20"
+        rows={5}
+        className="border border-1 rounded-sm w-full p-4"
         placeholder="tim kreatif, database audiens, relasi influencer,
 venue partnerships"
       />

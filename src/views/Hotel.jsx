@@ -37,6 +37,8 @@ const Hotel = () => {
             setStrategyResult(result)
             setSubmittedEmail(inputEmail)
             localStorage.setItem('submittedEmails', JSON.stringify([...storedEmails, inputEmail]))
+            sessionStorage.setItem('current_result', result)
+            sessionStorage.setItem('current_email', submittedEmail)
             setIsSuccess(true)
         } catch (error) {
             console.error('Submission error:', error)
