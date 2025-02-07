@@ -6,7 +6,10 @@ export const generateEventStrategy = async (formData) => {
   try {
     const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
-    const prompt = `CONTEXT: You are Event Marketing Strategist, a seasoned marketing consultant specializing in comprehensive event promotion.
+    const prompt = `Berikan Jawaban Menggunakan Bahasa Indonesia dan ketika membuat list price menggunakan Rupiah
+    
+    
+    CONTEXT: You are Event Marketing Strategist, a seasoned marketing consultant specializing in comprehensive event promotion.
 
     EVENT DETAILS:
     1. Event Name: ${formData.eventName}
@@ -27,18 +30,68 @@ export const generateEventStrategy = async (formData) => {
     16. Limitations: ${formData.marketingLimitation}
     17. Resources: ${formData.internalResources}
 
-    Generate a comprehensive marketing strategy using markdown formatting with these sections:
-    
-    ## 1. Executive Summary
-    ## 2. Target Audience Analysis
-    ## 3. Multi-Channel Strategy
-    ## 4. Creative Messaging
-    ## 5. Implementation Timeline
-    ## 6. Budget Allocation
-    ## 7. Success Metrics
-    ## 8. Post-Event Strategy
+    Generate a comprehensive marketing strategy using this structure:
 
-    Include specific platform recommendations, FOMO tactics, and 3 innovative engagement ideas.`;
+    ## 1. Executive Summary
+    [Concise overview of the complete strategy]
+
+    ## 2. Target Audience Insights
+    ### Demographics
+    - **Age Range:** 
+    - **Gender Split:**
+    - **Location:**
+    ### Psychographics
+    - **Interests:**
+    - **Values:**
+    - **Behavior Patterns:**
+
+    ## 3. Multi-Channel Marketing Plan
+    ### Digital Marketing Tactics
+    **Social Media:**
+    - Platform-specific strategies for ${formData.marketingChannel || "Instagram, TikTok, Facebook"}
+    
+    **Email Marketing:**
+    - Campaign structure and segmentation
+    
+    ### Traditional Marketing Tactics
+    **Print Advertising:**
+    - Newspaper/magazine recommendations
+    
+    ### Public Relations Strategy
+    - Press release angles
+    - Media partnership ideas
+
+    ## 4. Messaging Framework
+    **Key Messages:**
+    1. 
+    2.
+    
+    **Value Proposition:**
+    ${formData.nilaiJual}
+
+    ## 5. Timeline & Frequency
+    **${formData.longEvent} Plan:**
+    - Pre-Launch (${formData.longEvent} prior)
+    - Main Campaign
+    - Final Push
+
+    ## 6. Budget Allocation
+    - Digital: ${formData.marketingBudget ? Math.floor(formData.marketingBudget * 0.4) : '40%'}
+    - Traditional: 30%
+    - PR: 20%
+    - Contingency: 10%
+
+    ## 7. Success Metrics
+    - Ticket sales targets
+    - Social media KPIs
+    - ROI projections
+
+    REQUIREMENTS:
+    - Use markdown formatting
+    - Include specific platform recommendations
+    - Suggest 3 innovative engagement tactics
+    - Provide FOMO creation strategies
+    - Add post-event content ideas`;
 
     const result = await model.generateContent(prompt);
     const response = await result.response;

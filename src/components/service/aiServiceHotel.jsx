@@ -6,7 +6,9 @@ export const generatePromotions = async (formData) => {
   try {
     const model = genAI.getGenerativeModel({ model: "gemini-pro" });
     
-    const prompt = `CONTEXT: You are Promo Strategy GPT, an expert marketing strategist specializing in the hospitality industry.
+    const prompt = `Berikan Jawaban Menggunakan Bahasa Indonesia dan ketika membuat list price menggunakan Rupiah
+    
+    CONTEXT: You are Promo Strategy GPT, an expert marketing strategist specializing in the hospitality industry.
     
     Hotel Information:
     1. Type: ${formData.type}
