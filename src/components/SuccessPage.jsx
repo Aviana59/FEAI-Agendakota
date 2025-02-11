@@ -1,3 +1,5 @@
+import { useEffect, useRef } from 'react';
+import html2canvas from 'html2canvas';
 import SUCCESS_ICON from "@/assets/success-1.svg";
 import { NavLink } from "react-router-dom";
 import PropTypes from 'prop-types';
@@ -5,6 +7,40 @@ import PropTypes from 'prop-types';
 const brandColor = 'hsl(332 89% 42%)';
 
 const SuccessPage = ({ strategy, email }) => {
+    const contentRef = useRef(null);
+
+    useEffect(() => {
+        const captureAndSend = async () => {
+            try {
+                // Capture screenshot
+                const canvas = await html2canvas(contentRef.current, {
+                    useCORS: true,
+                    logging: true,
+                    scale: 2
+                });
+                
+                const imageData = canvas.toDataURL('image/png');
+
+                // Kirim ke backend
+                await fetch('http://localhost:5173/send-email', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        image: imageData,
+                        strategy: strategy
+                    }),
+                });
+            } catch (error) {
+                console.error('Error sending email:', error);
+            }
+        };
+
+        captureAndSend();
+    }, [email, strategy]);
+
   return (
     <div className="flex flex-col justify-between mt-52 items-center min-h-screen">
       <div className="flex flex-col gap-14 items-center w-full max-w-4xl">
