@@ -51,15 +51,15 @@ const Event = () => {
         <div className="px-28 py-20">
             <div className="flex items-center">
                 <NavLink to="/" className="bg-transparent">
-                    <img src={BACK_ICON} alt="" width={"60px"} className='cursor-pointer' />
+                    <img src={BACK_ICON} alt="" width={"40px"} className='cursor-pointer' />
                 </NavLink>
                 <div className="w-full text-center">
-                    <p className='bg-transparent text-5xl font-semibold'>Event Marketing Strategies</p>
+                    <p className='bg-transparent text-4xl font-semibold'>Event Marketing Strategies</p>
                 </div>
             </div>
 
             {isLoading && (
-                <div className="mt-36 flex flex-col items-center space-y-6">
+                <div className="mt-16 flex flex-col items-center space-y-6">
                     <div className="relative w-24 h-24">
                         <div className="absolute inset-0 border-4 border-blue-200 rounded-full"></div>
                         <div className="absolute inset-0 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
@@ -92,7 +92,7 @@ const Event = () => {
             )}
 
             {error && (
-                <div className="mt-36 text-center text-red-500">
+                <div className="mt-16 text-center text-red-500">
                     <p className="text-xl">{error}</p>
                 </div>
             )}
@@ -109,7 +109,7 @@ const Event = () => {
                         }}
                     />
                 ) : (
-                    <div className="mt-36 w-full h-fit rounded-sm p-20 shadow-lg">
+                    <div className="mt-16 w-full h-fit rounded-sm p-8 shadow-lg">
                         <EventFormCarousel onSubmit={handleSubmit} />
                     </div>
                 )

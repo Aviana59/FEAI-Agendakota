@@ -38,7 +38,7 @@ const Hotel = () => {
             setSubmittedEmail(inputEmail)
             localStorage.setItem('submittedEmails', JSON.stringify([...storedEmails, inputEmail]))
             sessionStorage.setItem('current_result', result)
-            sessionStorage.setItem('current_email', submittedEmail)
+            sessionStorage.setItem('current_email', inputEmail)
             setIsSuccess(true)
         } catch (error) {
             console.error('Submission error:', error)
@@ -55,10 +55,10 @@ const Hotel = () => {
         <div className="px-28 py-20">
             <div className="flex items-center">
                 <NavLink to="/" className="bg-transparent">
-                    <img src={BACK_ICON} alt="" width={"60px"} className='cursor-pointer' />
+                    <img src={BACK_ICON} alt="" width={"40px"} className='cursor-pointer' />
                 </NavLink>
                 <div className="w-full text-center">
-                    <p className='bg-transparent text-5xl font-semibold'>Marketing and Promotion Strategies</p>
+                    <p className='bg-transparent text-4xl font-semibold'>Marketing and Promotion Strategies</p>
                 </div>
             </div>
 
@@ -131,7 +131,7 @@ const Hotel = () => {
                         }}
                     />
                 ) : (
-                    <div className="mt-36 w-full h-fit rounded-sm p-20 shadow-lg">
+                    <div className="mt-16 w-full h-fit rounded-sm p-8 shadow-lg">
                         <FormCarousel onSumbit={handleSubmit} />
                     </div>
                 )
