@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 
 const LimitPage = ({ limitType = "general", onReset }) => {
   const limitMessages = {
-    email: "Anda telah menggunakan email yang sama untuk layanan AI kami",
+    email: "Anda telah mencapai batas maksimum penggunaan email (10 kali) untuk layanan AI kami",
     daily: "Anda telah mencapai batas penggunaan harian kami",
     general: "Anda telah menggunakan semua kesempatan yang tersedia untuk layanan AI kami dalam membantu Anda. Terima kasih telah memanfaatkan layanan kami"
   };

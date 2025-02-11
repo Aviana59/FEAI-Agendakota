@@ -2,18 +2,19 @@
 /* eslint-disable react/jsx-key */
 import { useState } from "react";
 
-const FormCarousel = ({ onSumbit }) => {
+const FormCarousel = ({ onSubmit }) => {
+  // Note: correctly spelled prop name
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState({
-    type: '',
-    location: '',
-    services: '',
-    target: '',
-    peak: '',
-    offPeak: '',
-    interesting: '',
-    specialServices: '',
-    email: ''
+    type: "",
+    location: "",
+    services: "",
+    target: "",
+    peak: "",
+    offPeak: "",
+    interesting: "",
+    specialServices: "",
+    email: "",
   });
 
   const handleChange = (e) => {
@@ -24,18 +25,62 @@ const FormCarousel = ({ onSumbit }) => {
   const steps = [
     <Step1 formData={formData} handleChange={handleChange} />,
     <Step2 formData={formData} handleChange={handleChange} />,
-    <Step3 formData={formData} handleChange={handleChange} />
+    <Step3 formData={formData} handleChange={handleChange} />,
   ];
 
-  // Single declaration of nextStep
+  const validateStep = (step) => {
+    switch (step) {
+      case 0:
+        if (!formData.type || !formData.location || !formData.services) {
+          alert("Please fill all required fields");
+          return false;
+        }
+        return true;
+      case 1:
+        if (!formData.target || !formData.peak || !formData.offPeak) {
+          alert("Please fill all required fields");
+          return false;
+        }
+        return true;
+      case 2:
+        if (!formData.interesting || !formData.specialServices) {
+          alert("Please fill all required fields");
+          return false;
+        }
+        if (!formData.email) {
+          alert("Please enter your email address");
+          return false;
+        }
+        if (!isValidEmail(formData.email)) {
+          alert("Please enter a valid email address");
+          return false;
+        }
+        return true;
+      default:
+        return true;
+    }
+  };
+
+  const isValidEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const handleSubmit = () => {
+    if (validateStep(currentStep)) {
+      onSubmit(formData); // Pass the entire formData object
+    }
+  };
+
   const nextStep = () => {
     if (!validateStep(currentStep)) {
-      alert('Please fill all required fields');
       return;
     }
 
     if (currentStep < steps.length - 1) {
       setCurrentStep(currentStep + 1);
+    } else {
+      handleSubmit(); // Submit on last step
     }
   };
 
@@ -45,40 +90,24 @@ const FormCarousel = ({ onSumbit }) => {
     }
   };
 
-  const validateStep = (step) => {
-    switch (step) {
-      case 0:
-        return formData.type && formData.location && formData.services;
-      case 1:
-        return formData.target && formData.peak && formData.offPeak;
-      case 2:
-        return formData.interesting && formData.specialServices && formData.email;
-      default:
-        return true;
-    }
-  };
-
-  const submit = () => {
-    onSumbit(formData);
-  };
   return (
     <div className="flex flex-col items-center justify-center">
       <p className="font-semibold text-2xl">Hotel</p>
       <div className="w-full p-6 overflow-hidden">
-        <div
-          className="overflow-hidden"
-        >
+        <div className="overflow-hidden">
           <div className="flex" style={{ width: `${steps.length * 100}%` }}>
-            {
-              steps.map((step, index) => (
-                <div key={index}
-                  className="w-full flex-shrink-0  transition-transform duration-500"
-                  style={{ width: `${100 / steps.length}%`, transform: `translateX(-${currentStep * 100}%)` }}
-                >
-                  {step}
-                </div>
-              ))
-            }
+            {steps.map((step, index) => (
+              <div
+                key={index}
+                className="w-full flex-shrink-0  transition-transform duration-500"
+                style={{
+                  width: `${100 / steps.length}%`,
+                  transform: `translateX(-${currentStep * 100}%)`,
+                }}
+              >
+                {step}
+              </div>
+            ))}
           </div>
         </div>
         <div className="mt-8 w-full flex justify-center gap-4 h-fit">
@@ -99,8 +128,9 @@ const FormCarousel = ({ onSumbit }) => {
           <button
             type="button"
             onClick={prevStep}
-            className={`px-4 py-2 w-full border border-1 border-primary text-primary font-semibold rounded ${currentStep === 0 ? "opacity-50 cursor-not-allowed" : ""
-              }`}
+            className={`px-4 py-2 w-full border border-1 border-primary text-primary font-semibold rounded ${
+              currentStep === 0 ? "opacity-50 cursor-not-allowed" : ""
+            }`}
             disabled={currentStep === 0}
           >
             Back
@@ -108,20 +138,18 @@ const FormCarousel = ({ onSumbit }) => {
           <button
             type="button"
             onClick={nextStep}
-            className={`px-4 py-2 w-full text-white bg-primary rounded font-semibold ${currentStep === steps.length - 1
-              ? "hidden"
-              : ""
-              }`}
+            className={`px-4 py-2 w-full text-white bg-primary rounded font-semibold ${
+              currentStep === steps.length - 1 ? "hidden" : ""
+            }`}
           >
             Next
           </button>
           <button
             type="button"
-            onClick={() => submit()}
-            className={`px-4 py-2 w-full text-white bg-primary rounded font-semibold ${currentStep === steps.length - 1
-              ? "block"
-              : "hidden"
-              }`}
+            onClick={handleSubmit}
+            className={`px-4 py-2 w-full text-white bg-primary rounded font-semibold ${
+              currentStep === steps.length - 1 ? "block" : "hidden"
+            }`}
           >
             Simpan
           </button>
@@ -163,7 +191,8 @@ const Step1 = ({ formData, handleChange }) => (
         value={formData.services}
         onChange={handleChange}
         className="border border-1 rounded-sm w-full p-4"
-        placeholder="Resepsionis 24 jam, gym, kolam renang, jogging, track, parkir mobil motor sepeda, laundry, spa," />
+        placeholder="Resepsionis 24 jam, gym, kolam renang, jogging, track, parkir mobil motor sepeda, laundry, spa,"
+      />
     </div>
   </form>
 );
@@ -189,7 +218,8 @@ const Step2 = ({ formData, handleChange }) => (
         onChange={handleChange}
         rows="5"
         className="border border-1 rounded-sm w-full p-4"
-        placeholder="libur nataru, imlek, libur panjang, valentine" />
+        placeholder="libur nataru, imlek, libur panjang, valentine"
+      />
     </div>
     <div className="mb-4">
       <label className="block mb-1 text-sm font-medium">Off Peak Seasons</label>
@@ -199,7 +229,8 @@ const Step2 = ({ formData, handleChange }) => (
         onChange={handleChange}
         rows="5"
         className="border border-1 rounded-sm w-full p-4"
-        placeholder="Hari kerja" />
+        placeholder="Hari kerja"
+      />
     </div>
   </form>
 );
@@ -207,7 +238,9 @@ const Step2 = ({ formData, handleChange }) => (
 const Step3 = ({ formData, handleChange }) => (
   <form className="p-4">
     <div className="mb-4">
-      <label className="block mb-1 text-sm font-medium">Hal Menarik dari Hotel</label>
+      <label className="block mb-1 text-sm font-medium">
+        Hal Menarik dari Hotel
+      </label>
       <textarea
         value={formData.interesting}
         onChange={handleChange}
@@ -216,10 +249,13 @@ const Step3 = ({ formData, handleChange }) => (
         className="border border-1 rounded-sm w-full p-4"
         placeholder="Pemandangan pantai yang dapat dilihat dari
 kamar, harga murah, terdapat berbagai tipe
-kamar" />
+kamar"
+      />
     </div>
     <div className="mb-4">
-      <label className="block mb-1 text-sm font-medium">Layanan Spesial Hotel</label>
+      <label className="block mb-1 text-sm font-medium">
+        Layanan Spesial Hotel
+      </label>
       <textarea
         value={formData.specialServices}
         onChange={handleChange}
@@ -227,17 +263,19 @@ kamar" />
         rows="5"
         className="border border-1 rounded-sm w-full p-4"
         placeholder="Check in 24 jam, terdapat opsi memesan kamar
-24 jam" />
+24 jam"
+      />
     </div>
     <div className="mb-4">
-      <label className="block mb-1 text-sm font-medium">Email</label>
+      <label className="block mb-1 text-sm font-medium">Email*</label>
       <input
         type="email"
         name="email"
         value={formData.email}
         onChange={handleChange}
-        className="w-full px-4 py-2 border rounded"
+        className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
         placeholder="johndoe@mail.com"
+        required
       />
     </div>
   </form>
