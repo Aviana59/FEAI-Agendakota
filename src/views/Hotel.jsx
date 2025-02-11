@@ -39,7 +39,7 @@ const Hotel = () => {
                 (e) => e.email === inputEmail && e.date === currentDate
             );
             if (dailyUsage.length >= 3) {
-                setLimitType("email");
+                setLimitType("daily");
                 return;
             }
 
